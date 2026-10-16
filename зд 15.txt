@@ -1,0 +1,38 @@
+function howManyTimes(time1, time2) {
+  let start = new Date(time1.replace(/-/g, '/'));
+  let end = new Date(time2.replace(/-/g, '/'));
+  
+  let totalStrikes = 0;
+  
+  let current = new Date(start);
+  current.setMinutes(0, 0, 0);
+  
+  while (current <= end) {
+    let hour = current.getHours() % 12;
+    if (hour === 0) hour = 12;
+    
+    let strikeStart = current.getTime();
+    let strikeEnd = strikeStart + hour * 1000;
+    
+    let overlapStart = Math.max(start.getTime(), strikeStart);
+    let overlapEnd = Math.min(end.getTime(), strikeEnd);
+    
+    if (overlapStart < overlapEnd) {
+      totalStrikes += (overlapEnd - overlapStart) / 1000;
+    }
+    
+    let halfStrikeStart = strikeStart + 30 * 60 * 1000;
+    let halfStrikeEnd = halfStrikeStart + 1000;
+    
+    let halfOverlapStart = Math.max(start.getTime(), halfStrikeStart);
+    let halfOverlapEnd = Math.min(end.getTime(), halfStrikeEnd);
+    
+    if (halfOverlapStart < halfOverlapEnd) {
+      totalStrikes += (halfOverlapEnd - halfOverlapStart) / 1000;
+    }
+    
+    current.setHours(current.getHours() + 1);
+  }
+  
+  return totalStrikes;
+}

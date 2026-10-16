@@ -1,0 +1,14 @@
+function isCircleSorted( arr ){
+  let drops = 0;
+  
+  for (let i = 0; i < arr.length; i++) {
+    let current = arr[i];
+    let next = arr[(i + 1) % arr.length];
+    
+    if (current > next) {
+      drops++;
+    }
+  }
+  
+  return drops <= 1;
+}

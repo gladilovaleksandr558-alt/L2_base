@@ -1,0 +1,19 @@
+function longest(arr, n) {
+  let arrWithIndexes = [];
+  
+  for (let i = 0; i < arr.length; i++) {
+    arrWithIndexes.push({
+      str: arr[i],
+      index: i
+    });
+  }
+  
+  arrWithIndexes.sort(function(a, b) {
+    if (b.str.length !== a.str.length) {
+      return b.str.length - a.str.length;
+    }
+    return a.index - b.index;
+  });
+  
+  return arrWithIndexes[n - 1].str;
+}

@@ -1,0 +1,15 @@
+function cache(func) {
+  let storage = {};
+  
+  return function(...args) {
+    let key = JSON.stringify(args);
+    
+    if (key in storage) {
+      return storage[key];
+    }
+    
+    let result = func(...args);
+    storage[key] = result;
+    return result;
+  };
+}

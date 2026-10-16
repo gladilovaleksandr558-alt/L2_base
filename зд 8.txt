@@ -1,0 +1,13 @@
+function expandedForm(num) {
+  let str = num.toString();
+  let parts = [];
+  
+  for (let i = 0; i < str.length; i++) {
+    if (str[i] !== '0') {
+      let zeros = '0'.repeat(str.length - 1 - i);
+      parts.push(str[i] + zeros);
+    }
+  }
+  
+  return parts.join(' + ');
+}
